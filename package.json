@@ -1,0 +1,23 @@
+{
+  "name": "chow_j_chathw",
+  "version": "1.0.0",
+  "description": "chat app with node and express",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "chat",
+    "app",
+    "node",
+    "express",
+    "vue"
+  ],
+  "author": "Joanna Chow",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.4"
+  }
+}
