@@ -1,0 +1,90 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1100px;
+	background: rgb(255, 255, 255);
+	margin: 30px auto;
+	overflow: hidden;
+    padding: 40px 200px;
+
+    header {
+        h1 {
+            font-weight: 500;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+    }
+}
+
+.username {
+    margin-bottom: 1em;
+}
+
+.form-container {
+    input[type= "text"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 1em 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: rgb(255, 255, 255);
+        cursor: pointer;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+#room {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+.avatars-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 8px 0;
+
+    label {
+        width: 100%;
+    }
+}
+
+.avatars {
+    img {
+        margin-top: 8px;
+        width: 100px;
+    }
+}
+
+.avatars > input{
+    display: none;
+}
+  
+.avatars > input + img{
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+  
+.avatars >input:checked + img{
+    border: 2px solid red;
+}
+

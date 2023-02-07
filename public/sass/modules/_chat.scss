@@ -1,0 +1,116 @@
+.chat-room {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+	margin: 30px auto;
+	overflow: hidden;
+    padding: 40px;
+
+    h1 {
+        font-weight: 500;
+        font-size: 1.5em;
+        color: rgb(0, 0, 0);
+    }
+
+
+    h2 {
+        font-weight: 500;
+        font-size: 1.2em;
+        line-height: 2em;
+        color: rgb(0, 0, 0);
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.5em;
+        color: rgb(0, 0, 0);
+    }
+
+    header {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid #ccc;
+
+    }
+
+    header ul{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    header li{
+        list-style: none;
+        display: inline-block;
+    }
+
+    form {
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px;
+        
+
+        textarea {
+            width: 100%;
+            font-family: inherit;
+            border: 1px solid #ccc;
+        }
+
+        input {
+            width: 10%;
+            font-family: inherit;
+            border: 1px solid #ccc;
+            background-color: rgb(255, 255, 255);
+        }
+    }
+}
+
+.btn {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 1em 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.chat-container {
+    display: grid;
+    grid-template-columns: .5fr 2fr;
+    min-height: 400px;
+
+    .side-bar {
+        background-color: rgb(245, 245, 245);
+        padding: 10px 20px;
+        display: inline-grid;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+
+    }
+
+    .messages {
+        background-color: rgb(252, 252, 252);
+        border-right: 1px solid #ccc;
+        padding: 10px 20px;
+    }
+}
+
+.chat-messages {
+    width: 45%;
+    border-radius: 1em;
+    padding: 0.5em 1em;
+    background-color: rgb(241, 188, 11);
+    margin-bottom: 0.8em;
+    float: left;
+    clear: both;
+}
+
+.other-messages {
+    background-color: rgb(50, 119, 184);
+    float: right;
+}

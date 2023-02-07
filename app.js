@@ -13,6 +13,10 @@ app.use(express.static('public'));
 
 // this is a route handler -> listen for incoming requests and send back a response
 app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/login.html');
+});
+
+app.get('/index', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
@@ -24,6 +28,11 @@ server.listen(port, () => {
 // socket.io script goes here
 io.on('connection', (socket) => {
     console.log('chat user connected');
+    socket.emit('connected', { sID: socket.id, message: 'new connection'});
+
+    socket.on('user_info', function(info) { 
+      console.log(info);
+    })
 
     // step 1 - receive incoming messages
     socket.on('chat_message', function(msg) {
@@ -32,7 +41,12 @@ io.on('connection', (socket) => {
       // step 2 
       // rebroadcase the current message to everyone connected to our chat service
       // it gets sent to all users, including the original message creator
-      io.emit('new_message', { id: socket.id, message: msg});
+      io.emit('new_message', { message: msg});
+    })
+
+    // function typing_event - catch incoming custom event 
+    socket.on('typing_event', function(user) { 
+      io.emit('typing', user)
     })
 });
 

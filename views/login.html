@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <title>Language Club</title>
+</head>
+<body>
+    <main>
+    <div class="login" id="app">
+        <header>
+            <h1>Welcome to the Language Club!</h1>
+        </header>
+        <form class="form-container" action="/index">
+            <div class="username">
+                <label for="username">Username</label>
+                <input v-model="username" name="username" id="username" type="text" placeholder="Enter username..." required>
+            </div>
+            <div>
+                <label for="room">Room</label>
+                <select name="room" id="room">
+                    <option value="Japanese">Japanese</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="Italian">Italian</option>
+                </select>
+            </div>
+            <div class="avatars-container">
+                <div><label for="username">Select Avatar</label></div>
+                <div>     
+                    <label class="avatars"  id="avatar1">
+                    <input type="radio" @click="selectedAvatar" name="avatar1"/>
+                    <img src="images/avatar1.png" alt=""/>
+                    </label>
+                    
+                    <label class="avatars" id="avatar2">
+                    <input type="radio" @click="selectedAvatar" name="avatar2"/>
+                    <img src="images/avatar2.png" alt=""/>
+                    </label>
+                    
+                    <label class="avatars" id="avatar3">
+                    <input type="radio" @click="selectedAvatar" name="avatar3"/>
+                    <img src="images/avatar3.png" alt=""/>
+                    </label>
+
+                    <label class="avatars" id="avatar4">
+                        <input type="radio" @click="selectedAvatar" name="avatar4"/>
+                        <img src="images/avatar4.png" alt=""/>
+                    </label>
+                    
+                </div>
+            </div>
+            <button type="submit">Join Chat</button>
+        </form>
+    </div>
+    </main>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/07199f6f37.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js" type="module" defer></script>
+</body>
+</html>

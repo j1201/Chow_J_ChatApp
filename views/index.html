@@ -4,27 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App with Node & Express</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <title>Language Club</title>
 </head>
 <body>
-    <h1>Chat App</h1>
-
-    <main id="app">
-        <form>
-            <label for="message">Something to say?</label>
-            <textarea v-model="message" id="textarea" autocomplete="off" class="message"></textarea>
-            <input @click.prevent="dispatchMessage" type="submit" value="Go!">
-
-            <section class="messages">
+    <main id="app" class="chat-room">
+        <header>
+            <ul>
+                
+                <li><h1><i class="fa-sharp fa-solid fa-globe"></i> Language Club</h1></li>
+                <li><a href="/" class="btn">Leave Room</a></li>
+            </ul> 
+        </header>
+        <section class="chat-container">
+            <div class="side-bar">
+                <div class="room-name">
+                    <h2><i class="fa-solid fa-house"></i> Room</h2>
+                    <p>Japanese</p>
+                </div>
+                <div class="users-list">
+                    <h2><i class="fa-solid fa-users"></i> Users</h2>
+                    <p>Iris</p>
+                    <p>Karl</p>
+                    <p>John</p>
+                </div>
+            </div>
+            <div class="messages">
                 <ul id="messages">
-                    <!-- render a new component for every chat message we receive -->
+                    <!-- render a new message component for every message -->
                     <newmsg v-for="message in messages" :msg="message"></newmsg>
                 </ul>
-            </section>
-        </form>
+            </div>
+        </section>
+        <section>
+            <form>
+                <label for="message"></label>
+                <!-- See if someone is typing - @focus="dispatchTypingEvent" -->
+                <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off" placeholder="Enter Messages..."></textarea>
+                <input @click.prevent="dispatchMessage" type="submit" value="Send">
+            </form>
+        </section>
+        <!-- <section>
+            <h2>Input messages here:</h2>
+            <input v-model="nickname" id="nickname" type="text" placeholder="Nickname?">
+            
+            <form>
+                <label for="message">Something to say?</label> -->
+                <!-- See if someone is typing - @focus="dispatchTypingEvent" -->
+                <!-- <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off"></textarea>
+                <input @click.prevent="dispatchMessage" type="submit" value="Send">
+            </form>
+        </section> -->
+
+        <!-- <section class="messages">
+            <h2>Receive messages here:</h2>
+            <ul id="messages"> -->
+                <!-- render a new message component for every message -->
+                <!-- <newmsg v-for="message in messages" :msg="message"></newmsg>
+            </ul>
+        </section> -->
     </main>    
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/07199f6f37.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js" type="module" defer></script>
 </body>
