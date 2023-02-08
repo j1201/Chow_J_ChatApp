@@ -102,15 +102,37 @@
 
 .chat-messages {
     width: 45%;
-    border-radius: 1em;
+    border-radius: 2em;
     padding: 0.5em 1em;
     background-color: rgb(241, 188, 11);
     margin-bottom: 0.8em;
     float: left;
     clear: both;
+    display: flex;
+    align-items: center;
 }
 
 .other-messages {
     background-color: rgb(50, 119, 184);
     float: right;
+}
+
+.msg-container {
+    margin-left: 20px;
+}
+
+.user-img-container {
+    background-color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 5px;
 }
