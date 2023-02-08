@@ -17,11 +17,11 @@
         <form class="form-container" action="/index">
             <div class="username">
                 <label for="username">Username</label>
-                <input v-model="username" name="username" id="username" type="text" placeholder="Enter username..." required>
+                <input v-model="currentUser" name="username" id="username" type="text" placeholder="Enter username..." required>
             </div>
             <div>
                 <label for="room">Room</label>
-                <select name="room" id="room">
+                <select  v-model="room" name="room" id="room">
                     <option value="Japanese">Japanese</option>
                     <option value="Spanish">Spanish</option>
                     <option value="French">French</option>
@@ -53,7 +53,7 @@
                     
                 </div>
             </div>
-            <button type="submit">Join Chat</button>
+            <button @click="userInfo" type="submit">Join Chat</button>
         </form>
     </div>
     </main>

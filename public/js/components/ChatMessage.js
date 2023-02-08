@@ -14,8 +14,11 @@ export default {
 
     template: `
     <article class="chat-messages" :class="{ 'other-messages' : matchedID }">
-        <h2> {{ msg.message.user }} says: </h2>
-        <p> {{ msg.message.content }}</p>
+        <div class="user-img-container"><img class="user-img" :src='"images/" + msg.message.img + ".png"' alt="user image" ></div>
+        <div class="msg-container">
+            <p> {{ msg.message.user }}:</p>
+            <h2> {{ msg.message.content }}</h2>
+        </div>
     </article>
     `
 }

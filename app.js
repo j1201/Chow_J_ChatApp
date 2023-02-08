@@ -30,10 +30,6 @@ io.on('connection', (socket) => {
     console.log('chat user connected');
     socket.emit('connected', { sID: socket.id, message: 'new connection'});
 
-    socket.on('user_info', function(info) { 
-      console.log(info);
-    })
-
     // step 1 - receive incoming messages
     socket.on('chat_message', function(msg) {
       console.log(msg); // have a look at the message data
@@ -48,5 +44,6 @@ io.on('connection', (socket) => {
     socket.on('typing_event', function(user) { 
       io.emit('typing', user)
     })
+
 });
 

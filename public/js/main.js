@@ -1,14 +1,7 @@
 // imports go at the top
 import ChatMsg from'./components/ChatMessage.js';
+import UserBar from'./components/UserInfo.js';
 var socket = io();
-
-
-// get username and room from URL
-const { username, room} = Qs.parse(location.search.split('?')[1], {
-  ignoreQueryPrefix: true
-})
-
-
 
 // utility function for socket
 function setUserID({ sID }) {
@@ -34,20 +27,27 @@ const vm = createApp({
         socketID: '',
         message: '',
         messages: [],
-        nickname: '',
-        avatar: localStorage.getItem('selectedAvatar')
+        avatar: localStorage.getItem('selectedAvatar'),
+        currentUser: localStorage.getItem('currentUser'),
+        room: localStorage.getItem('room')
       }
     },
 
     methods: {
+      userInfo() {
+        localStorage.setItem('currentUser', this.currentUser);
+        localStorage.setItem('room', this.room);
+      },
+
       dispatchMessage() {
         console.log('send a message to the chat service');
 
         // data that sent to the server
         socket.emit('chat_message', { 
           content: this.message, 
-          user: this.nickname || 'anonymous',
-          id: this.socketID
+          user: this.currentUser,
+          id: this.socketID,
+          img: this.avatar
         });
 
         this.message = '';
@@ -64,7 +64,8 @@ const vm = createApp({
     },
 
     components: {
-        newmsg: ChatMsg
+        newmsg: ChatMsg,
+        newuser: UserBar
     }
 
   }).mount('#app')
@@ -72,3 +73,4 @@ const vm = createApp({
   socket.addEventListener('connected', setUserID);
   socket.addEventListener('new_message', addNewMessage);
   socket.addEventListener('typing', handleTypingEvent);
+

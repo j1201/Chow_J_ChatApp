@@ -18,7 +18,12 @@
             </ul> 
         </header>
         <section class="chat-container">
-            <div class="side-bar">
+            <!-- <newuser v-for="(info, index) in userInfo" :username="info[0]" :room="info[1]" :key="index"></newuser> -->
+
+            <newuser :userinfo="[room, currentUser]"></newuser>
+
+
+            <!-- <div class="side-bar">
                 <div class="room-name">
                     <h2><i class="fa-solid fa-house"></i> Room</h2>
                     <p>Japanese</p>
@@ -29,7 +34,7 @@
                     <p>Karl</p>
                     <p>John</p>
                 </div>
-            </div>
+            </div> -->
             <div class="messages">
                 <ul id="messages">
                     <!-- render a new message component for every message -->
