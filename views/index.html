@@ -9,66 +9,92 @@
     <title>Language Club</title>
 </head>
 <body>
-    <main id="app" class="chat-room">
-        <header>
-            <ul>
-                
-                <li><h1><i class="fa-sharp fa-solid fa-globe"></i> Language Club</h1></li>
-                <li><a href="/" class="btn">Leave Room</a></li>
-            </ul> 
-        </header>
-        <section class="chat-container">
-            <!-- <newuser v-for="(info, index) in userInfo" :username="info[0]" :room="info[1]" :key="index"></newuser> -->
-
-            <newuser :userinfo="[room, currentUser]"></newuser>
-
-
-            <!-- <div class="side-bar">
-                <div class="room-name">
-                    <h2><i class="fa-solid fa-house"></i> Room</h2>
-                    <p>Japanese</p>
-                </div>
-                <div class="users-list">
-                    <h2><i class="fa-solid fa-users"></i> Users</h2>
-                    <p>Iris</p>
-                    <p>Karl</p>
-                    <p>John</p>
-                </div>
-            </div> -->
-            <div class="messages">
-                <ul id="messages">
-                    <!-- render a new message component for every message -->
-                    <newmsg v-for="message in messages" :msg="message"></newmsg>
-                </ul>
+    <main id="app">
+        <div v-if="joinRoom" class="login">
+            <div>
+                <h1>Welcome to the Language Club!</h1>
             </div>
-        </section>
-        <section>
-            <form>
-                <label for="message"></label>
-                <!-- See if someone is typing - @focus="dispatchTypingEvent" -->
-                <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off" placeholder="Enter Messages..."></textarea>
-                <input @click.prevent="dispatchMessage" type="submit" value="Send">
+            <form class="form-container">
+                <div class="username">
+                    <label for="username">Username</label>
+                    <input v-model="currentUser" name="username" id="username" type="text" placeholder="Enter username..." required>
+                </div>
+                <div>
+                    <label for="room">Room</label>
+                    <select  v-model="roomName" name="room" id="room" required>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="Italian">Italian</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="avatars-container">
+                    <div><label for="username">Select Avatar</label></div>
+                    <div>     
+                        <label class="avatars"  id="avatar1">
+                        <input type="checkbox" @click="selectedAvatar" name="avatar1"/>
+                        <img src="images/avatar1.png" alt=""/>
+                        </label>
+                        
+                        <label class="avatars" id="avatar2">
+                        <input type="checkbox" @click="selectedAvatar" name="avatar2"/>
+                        <img src="images/avatar2.png" alt=""/>
+                        </label>
+                        
+                        <label class="avatars" id="avatar3">
+                        <input type="checkbox" @click="selectedAvatar" name="avatar3"/>
+                        <img src="images/avatar3.png" alt=""/>
+                        </label>
+    
+                        <label class="avatars" id="avatar4">
+                            <input type="checkbox" @click="selectedAvatar" name="avatar4"/>
+                            <img src="images/avatar4.png" alt=""/>
+                        </label>
+                        
+                    </div>
+                </div>
+                <button @click="userJoin" type="submit">Join Chat</button>
             </form>
-        </section>
-        <!-- <section>
-            <h2>Input messages here:</h2>
-            <input v-model="nickname" id="nickname" type="text" placeholder="Nickname?">
-            
-            <form>
-                <label for="message">Something to say?</label> -->
-                <!-- See if someone is typing - @focus="dispatchTypingEvent" -->
-                <!-- <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off"></textarea>
-                <input @click.prevent="dispatchMessage" type="submit" value="Send">
-            </form>
-        </section> -->
+        </div>
+        <!-- display chat room when the user joins -->
+        <div v-if="chatRoom" class="chat-room">
+            <header>
+                <ul>
+                    <li><h1><i class="fa-sharp fa-solid fa-globe"></i> Language Club</h1></li>
+                    <li><a class="btn" @click="userLeft">Leave Room</a></li>
+                </ul> 
+            </header>
+            <section class="chat-container">
+                <div class="side-bar">
+                    <div class="room-name">
+                        <h2><i class="fa-solid fa-house"></i> Room</h2>
+                        <p> {{ roomName }}</p>
+                    </div>
+                    <div class="users-list">
+                        <h2><i class="fa-solid fa-users"></i> Users</h2>
+                        <p v-for="user in userList"> {{ user.username }} </p>
+                    </div>
+                </div>
 
-        <!-- <section class="messages">
-            <h2>Receive messages here:</h2>
-            <ul id="messages"> -->
-                <!-- render a new message component for every message -->
-                <!-- <newmsg v-for="message in messages" :msg="message"></newmsg>
-            </ul>
-        </section> -->
+                <div class="messages">
+                    <ul id="messages">
+                        <li class="user-join"></li>
+                        <li class="is-typing"></li>
+                        <!-- render a new message component for every message -->
+                        <newmsg v-for="message in messages" :msg="message"></newmsg>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <form>
+                    <label for="message"></label>
+                    <!-- See if someone is typing - @focus="dispatchTypingEvent" -->
+                    <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off" placeholder="Enter Messages..."></textarea>
+                    <input @click.prevent="dispatchMessage" type="submit" value="Send">
+                </form>
+            </section>
+        </div>
     </main>    
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
