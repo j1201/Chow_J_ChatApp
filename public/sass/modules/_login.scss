@@ -7,13 +7,12 @@
 	margin: 30px auto;
 	overflow: hidden;
     padding: 40px 200px;
+    z-index: 10000;
 
-    header {
-        h1 {
+    h1 {
             font-weight: 500;
             font-size: 2em;
             margin-bottom: 1em;
-        }
     }
 }
 

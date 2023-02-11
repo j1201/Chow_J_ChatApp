@@ -1,6 +1,5 @@
 // imports go at the top
 import ChatMsg from'./components/ChatMessage.js';
-import UserBar from'./components/UserInfo.js';
 var socket = io();
 
 // utility function for socket
@@ -11,12 +10,22 @@ function setUserID({ sID }) {
 
 // utility functions for socket
 function addNewMessage(message) {
-    vm.messages.push(message);
+  vm.messages.push(message);
+  document.querySelector('.is-typing').innerHTML = '';
+  document.querySelector('.user-join').innerHTML = ''
+
 }
 
+// show who is typing
 function handleTypingEvent(user) {
-  console.log(user,'is typing');
+  document.querySelector('.is-typing').innerHTML = user.user + ' is typing...'
 }
+
+// show who joins the room
+function newUser(user) {
+  document.querySelector('.user-join').innerHTML = user + ' has joined the chat.'
+}
+
 
 const { createApp } = Vue
 
@@ -28,15 +37,32 @@ const vm = createApp({
         message: '',
         messages: [],
         avatar: localStorage.getItem('selectedAvatar'),
-        currentUser: localStorage.getItem('currentUser'),
-        room: localStorage.getItem('room')
+        currentUser: '',
+        roomName: '',
+        joinRoom: true,
+        chatRoom: false,
+        userList: []
       }
     },
 
+    mounted() {
+      socket.on('user_list', (userList) => {
+        this.userList = userList;
+      })
+    },
+    
     methods: {
-      userInfo() {
-        localStorage.setItem('currentUser', this.currentUser);
-        localStorage.setItem('room', this.room);
+      userJoin() {
+
+        socket.emit('join_room', {
+          id: this.socketID,
+          room: this.roomName,
+          user: this.currentUser
+        });
+
+        this.joinRoom = false;
+        this.chatRoom = true;
+
       },
 
       dispatchMessage() {
@@ -47,7 +73,8 @@ const vm = createApp({
           content: this.message, 
           user: this.currentUser,
           id: this.socketID,
-          img: this.avatar
+          img: this.avatar,
+          room: this.roomName
         });
 
         this.message = '';
@@ -55,17 +82,23 @@ const vm = createApp({
 
       dispatchTypingEvent () {
         // send the typing notification to the server
-        socket.emit('typing_event', {user: this.nickname || 'annoymous'})
+        socket.emit('typing_event', {
+          user: this.currentUser,
+          room: this.roomName
+        })
       },
 
       selectedAvatar(event) {
         localStorage.setItem('selectedAvatar', event.target.parentElement.id);
+      },
+
+      userLeft() {
+        window.location.reload();
       }
     },
 
     components: {
-        newmsg: ChatMsg,
-        newuser: UserBar
+        newmsg: ChatMsg
     }
 
   }).mount('#app')
@@ -73,4 +106,4 @@ const vm = createApp({
   socket.addEventListener('connected', setUserID);
   socket.addEventListener('new_message', addNewMessage);
   socket.addEventListener('typing', handleTypingEvent);
-
+  socket.addEventListener('user_join', newUser);
