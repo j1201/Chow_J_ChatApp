@@ -26,6 +26,11 @@ function newUser(user) {
   document.querySelector('.user-join').innerHTML = user + ' has joined the chat.'
 }
 
+// show who leaves the room
+function leftUser(user) {
+  document.querySelector('.user-join').innerHTML = user.username + ' has left the chat.'
+}
+
 
 const { createApp } = Vue
 
@@ -36,12 +41,12 @@ const vm = createApp({
         socketID: '',
         message: '',
         messages: [],
-        avatar: localStorage.getItem('selectedAvatar'),
         currentUser: '',
         roomName: '',
         joinRoom: true,
         chatRoom: false,
-        userList: []
+        userList: [],
+        selectedAvatar: ''
       }
     },
 
@@ -73,7 +78,7 @@ const vm = createApp({
           content: this.message, 
           user: this.currentUser,
           id: this.socketID,
-          img: this.avatar,
+          img: this.selectedAvatar,
           room: this.roomName
         });
 
@@ -86,10 +91,6 @@ const vm = createApp({
           user: this.currentUser,
           room: this.roomName
         })
-      },
-
-      selectedAvatar(event) {
-        localStorage.setItem('selectedAvatar', event.target.parentElement.id);
       },
 
       userLeft() {
@@ -107,3 +108,6 @@ const vm = createApp({
   socket.addEventListener('new_message', addNewMessage);
   socket.addEventListener('typing', handleTypingEvent);
   socket.addEventListener('user_join', newUser);
+  socket.addEventListener('user_left', leftUser);
+
+

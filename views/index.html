@@ -33,22 +33,22 @@
                     <div><label for="username">Select Avatar</label></div>
                     <div>     
                         <label class="avatars"  id="avatar1">
-                        <input type="checkbox" @click="selectedAvatar" name="avatar1"/>
+                        <input type="radio" v-model="selectedAvatar" value="avatar1"/>
                         <img src="images/avatar1.png" alt=""/>
                         </label>
                         
                         <label class="avatars" id="avatar2">
-                        <input type="checkbox" @click="selectedAvatar" name="avatar2"/>
+                        <input type="radio" v-model="selectedAvatar" value="avatar2"/>
                         <img src="images/avatar2.png" alt=""/>
                         </label>
                         
                         <label class="avatars" id="avatar3">
-                        <input type="checkbox" @click="selectedAvatar" name="avatar3"/>
+                        <input type="radio" v-model="selectedAvatar" value="avatar3"/>
                         <img src="images/avatar3.png" alt=""/>
                         </label>
     
                         <label class="avatars" id="avatar4">
-                            <input type="checkbox" @click="selectedAvatar" name="avatar4"/>
+                            <input type="radio" v-model="selectedAvatar" value="avatar4"/>
                             <img src="images/avatar4.png" alt=""/>
                         </label>
                         

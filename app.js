@@ -76,9 +76,21 @@ io.on('connection', (socket) => {
       console.log(connectedUsers);
 
       // Iterate over the elements(room) of the connectedUsers array
-      // Filter out the disconnected user and update the user list in that room
+      // Get th username of the left user with their id
+      // Remove the user from the list
       Object.keys(connectedUsers).forEach(room => {
-        connectedUsers[room] = connectedUsers[room].filter(user => user.id !== socket.id);
+        connectedUsers[room].forEach(user => {
+          if (user.id == socket.id) {
+            
+            console.log(`${user.username} left`);
+            const i = connectedUsers[room].indexOf(user);
+            connectedUsers[room].splice(i, 1);
+            
+            io.to(room).emit('user_left', user)
+          } 
+        });
+        
+        // Update the user list in that room
         io.to(room).emit('user_list', connectedUsers[room]);
       });
       
