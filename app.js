@@ -75,17 +75,19 @@ io.on('connection', (socket) => {
       console.log(socket.id);
       console.log(connectedUsers);
 
-      // Iterate over the elements(room) of the connectedUsers array
+      // Iterate over the elements(room) and users of the connectedUsers array
       // Get th username of the left user with their id
-      // Remove the user from the list
       Object.keys(connectedUsers).forEach(room => {
         connectedUsers[room].forEach(user => {
           if (user.id == socket.id) {
             
             console.log(`${user.username} left`);
             const i = connectedUsers[room].indexOf(user);
+            
+            // Remove the user from the list
             connectedUsers[room].splice(i, 1);
             
+            // Broadcast a message of user left
             io.to(room).emit('user_left', user)
           } 
         });
