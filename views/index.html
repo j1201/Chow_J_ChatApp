@@ -93,6 +93,8 @@
                     <textarea @focus="dispatchTypingEvent" v-model="message" id="textarea" class="message" autocomplete="off" placeholder="Enter Messages..."></textarea>
                     <input @click.prevent="dispatchMessage" type="submit" value="Send">
                 </form>
+                <audio class="join-audio" autoplay src="assets/join.mp3"></audio>
+                <audio class="msg-audio" src="assets/message.mp3"></audio>
             </section>
         </div>
     </main>    

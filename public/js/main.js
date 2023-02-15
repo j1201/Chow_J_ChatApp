@@ -13,6 +13,7 @@ function addNewMessage(message) {
   vm.messages.push(message);
   document.querySelector('.is-typing').innerHTML = '';
   document.querySelector('.user-join').innerHTML = ''
+  document.querySelector('.msg-audio').play();  
 
 }
 
@@ -23,7 +24,9 @@ function handleTypingEvent(user) {
 
 // show who joins the room
 function newUser(user) {
-  document.querySelector('.user-join').innerHTML = user + ' has joined the chat.'
+  document.querySelector('.user-join').innerHTML = user + ' has joined the chat.';
+
+  document.querySelector('.join-audio').play();  
 }
 
 // show who leaves the room
