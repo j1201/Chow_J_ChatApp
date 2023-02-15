@@ -1,6 +1,6 @@
-# Chow_J_ChatApp
+# Welcome to the Language Club
 
-## Welcome to the Language Club
+![chat room screenshot](images/screenshot.png)
 
 ## About the Project
 
