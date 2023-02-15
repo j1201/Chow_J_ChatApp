@@ -1,6 +1,6 @@
 # Welcome to the Language Club
 
-![chat room screenshot](images/screenshot)
+![chat room screenshot](images/screenshot.png)
 
 ## About the Project
 
